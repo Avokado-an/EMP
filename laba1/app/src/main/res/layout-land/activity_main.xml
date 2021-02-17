@@ -9,52 +9,64 @@
     <EditText
         android:id="@+id/expression"
         android:layout_width="326dp"
-        android:layout_height="46dp"
+        android:layout_height="66dp"
         android:background="@drawable/text_input"
         android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.935"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
+        app:layout_constraintVertical_bias="0.093" />
+
+    <EditText
+        android:id="@+id/result"
+        android:layout_width="326dp"
+        android:layout_height="66dp"
+        android:background="@drawable/text_input"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.935"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expression"
+        app:layout_constraintVertical_bias="0.062" />
 
     <LinearLayout
-        android:id="@+id/linearLayout5"
+        android:id="@+id/linearLayout11"
         style="@style/buttons_layout"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
-        android:layout_marginTop="49dp"
-        android:layout_marginBottom="452dp"
+        android:layout_marginStart="328dp"
+        android:layout_marginLeft="328dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/result"
-        app:layout_constraintVertical_bias="0.448">
+        app:layout_constraintVertical_bias="0.0">
 
         <Button
-            android:id="@+id/number_7"
+            android:id="@+id/plus"
             style="@style/calc_button"
-            android:text="7" />
+            android:text="+" />
 
         <Button
-            android:id="@+id/number_8"
+            android:id="@+id/equals"
             style="@style/calc_button"
-            android:text="8" />
+            android:text="=" />
 
         <Button
-            android:id="@+id/number_9"
+            android:id="@+id/minus"
             style="@style/calc_button"
-            android:text="9" />
+            android:text="-" />
     </LinearLayout>
 
     <LinearLayout
         style="@style/buttons_layout"
+        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.323"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout9"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout11"
         app:layout_constraintVertical_bias="0.0">
 
@@ -77,8 +89,8 @@
     <LinearLayout
         android:id="@+id/linearLayout9"
         style="@style/buttons_layout"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
@@ -101,10 +113,38 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout5"
+        style="@style/buttons_layout"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginBottom="452dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result"
+        app:layout_constraintVertical_bias="0.521">
+
+        <Button
+            android:id="@+id/number_7"
+            style="@style/calc_button"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/number_8"
+            style="@style/calc_button"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/number_9"
+            style="@style/calc_button"
+            android:text="9" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayout4"
         style="@style/buttons_layout"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
@@ -127,36 +167,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout11"
-        style="@style/buttons_layout"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout9"
-        app:layout_constraintVertical_bias="0.0">
-
-        <Button
-            android:id="@+id/plus"
-            style="@style/calc_button"
-            android:text="+" />
-
-        <Button
-            android:id="@+id/equals"
-            style="@style/calc_button"
-            android:text="=" />
-
-        <Button
-            android:id="@+id/minus"
-            style="@style/calc_button"
-            android:text="-" />
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/linearLayout7"
         style="@style/buttons_layout"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
@@ -177,18 +191,5 @@
             style="@style/calc_button"
             android:text="3" />
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/result"
-        android:layout_width="321dp"
-        android:layout_height="48dp"
-        android:background="@drawable/text_input"
-        android:gravity="center_vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expression"
-        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

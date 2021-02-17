@@ -6,8 +6,6 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Arrays;
-
 import bsh.EvalError;
 import bsh.Interpreter;
 
@@ -19,12 +17,36 @@ public class MainActivity extends AppCompatActivity {
     private EditText expression;
 
     private boolean wasLastOperationAction = false;
+    private boolean isNumberFractional = false;
+
+    private static final String LAST_OPERATION_STATE = "lastOperationState";
+    private static final String IS_NUMBER_FRACTIONAL_STATE = "isFractionalState";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        defineElements();
+        initNumberButtons();
+        initOperationButtons();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        isNumberFractional = savedInstanceState.getBoolean(IS_NUMBER_FRACTIONAL_STATE);
+        wasLastOperationAction = savedInstanceState.getBoolean(LAST_OPERATION_STATE);
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(LAST_OPERATION_STATE, wasLastOperationAction);
+        outState.putBoolean(IS_NUMBER_FRACTIONAL_STATE, isNumberFractional);
+        super.onSaveInstanceState(outState);
+    }
+
+    private void defineElements() {
         button0 = findViewById(R.id.number_0);
         button1 = findViewById(R.id.number_1);
         button2 = findViewById(R.id.number_2);
@@ -44,8 +66,10 @@ public class MainActivity extends AppCompatActivity {
         buttonEqual = findViewById(R.id.equals);
         result = findViewById(R.id.result);
         expression = findViewById(R.id.expression);
+    }
 
-        button0.setOnClickListener(v -> inputNumber("o"));
+    private void initNumberButtons() {
+        button0.setOnClickListener(v -> inputNumber("0"));
         button1.setOnClickListener(v -> inputNumber("1"));
         button2.setOnClickListener(v -> inputNumber("2"));
         button3.setOnClickListener(v -> inputNumber("3"));
@@ -55,9 +79,11 @@ public class MainActivity extends AppCompatActivity {
         button7.setOnClickListener(v -> inputNumber("7"));
         button8.setOnClickListener(v -> inputNumber("8"));
         button9.setOnClickListener(v -> inputNumber("9"));
+    }
 
+    private void initOperationButtons() {
         buttonAdd.setOnClickListener(v -> inputOperation('+'));
-        buttonSub.setOnClickListener(v -> inputOperation('-'));
+        buttonSub.setOnClickListener(v -> inputSubOperation());
         buttonMul.setOnClickListener(v -> inputOperation('*'));
         buttonDivision.setOnClickListener(v -> inputOperation('/'));
 
@@ -67,8 +93,9 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 if (wasLastOperationAction) {
                     expression.setText(expression.getText().toString().concat("0."));
-                } else {
+                } else if (!isNumberFractional) {
                     expression.setText(expression.getText().toString().concat("."));
+                    isNumberFractional = true;
                 }
             }
         });
@@ -86,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void inputNumber(String number) {
-        expression.setText(expression.getText().toString() + number);
+        expression.setText(expression.getText().toString().concat(number));
         result.setText(calculateResult(expression.getText().toString()));
         wasLastOperationAction = false;
     }
@@ -101,7 +128,19 @@ public class MainActivity extends AppCompatActivity {
                 expression.setText(expression.getText().toString().concat(String.valueOf(operation)));
             }
             wasLastOperationAction = true;
+            isNumberFractional = false;
         }
+    }
+
+    private void inputSubOperation() {
+        char subOperationSymbol = '-';
+        if (wasLastOperationAction && !expression.getText().toString().isEmpty()) {
+            expression.setText(replaceLastSymbol(expression.getText().toString(), subOperationSymbol));
+        } else {
+            expression.setText(expression.getText().toString().concat(String.valueOf(subOperationSymbol)));
+        }
+        wasLastOperationAction = true;
+        isNumberFractional = false;
     }
 
     private String replaceLastSymbol(String startingString, char symbol) {
